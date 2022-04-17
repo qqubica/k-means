@@ -1,8 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,6 +26,27 @@ public class Main {
 
         printGroups(groups);
 
+        printGroupsCleannes(groups);
+
+    }
+
+    public static void printGroupsCleannes(Group [] groups){
+        for (int i = 0; i < groups.length; i++) {
+            Map<String,Integer> map = new HashMap<>();
+            for (int j = 0; j < groups[i].size(); j++) {
+                map.put(groups[i].group.get(j).result, map.get(groups[i].group.get(j).result) == null ? 1 : map.get(groups[i].group.get(j).result) + 1);
+            }
+            String primary = "";
+            double max = -1;
+            for (Map.Entry<String,Integer> entry: map.entrySet()){
+                if (max < entry.getValue()){
+                    max = entry.getValue();
+                    primary = entry.getKey();
+                }
+            }
+            DecimalFormat df = new DecimalFormat("0.00");
+            System.out.println("Group "+i+" cleannes is " + df.format(max/groups[i].size()*100) + "% and main type is " + primary);
+        }
     }
 
     public static void printGroups(Group[] groups) {
