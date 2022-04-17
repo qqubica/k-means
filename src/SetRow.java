@@ -22,11 +22,10 @@ public class SetRow {
 
     @Override
     public String toString() {
-        String tmp = "";
+        String tmp = result + "\t";
         for (int i = 0; i < parameters.length; i++) {
             tmp += parameters[i] + " ";
         }
-        tmp += result;
         return tmp;
     }
 
